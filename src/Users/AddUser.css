@@ -1,0 +1,26 @@
+.add-user {
+  margin: 2rem auto;
+  padding: 1rem;
+  width: 90%;
+  max-width: 40rem;
+}
+
+.add-user label {
+  display: inline-block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.add-user input {
+  font: inherit;
+  display: inline-block;
+  width: auto;
+  border: 3px solid #ccc;
+  padding: 0.15rem;
+  margin: 0.5rem;
+}
+
+.add-user input:focus {
+  outline: none;
+  border-color: #b346c9;
+}
