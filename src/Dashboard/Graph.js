@@ -1,6 +1,6 @@
 // STEP 1 - Include Dependencies
 // Include react
-import React from "react";
+import React, { useState } from "react";
 
 // Include the react-fusioncharts component
 import ReactFC from "react-fusioncharts";
@@ -54,9 +54,10 @@ class Graph extends React.Component {
     // STEP 3 - Creating the JSON object to store the chart configurations
     const chartConfigs = {
       type: "column2d", // The chart type
-      width: window.matchMedia("(max-width: 700px)").matches
-        ? window.innerWidth / 1
-        : window.innerWidth / 2.5, // Width of the chart
+      width:
+        window.innerWidth >= 700
+          ? window.innerWidth / 1
+          : window.innerWidth / 2.5, // Width of the chart
       height: window.innerHeight / 2, // Height of the chart
       dataFormat: "json", // Data type
       dataSource: {

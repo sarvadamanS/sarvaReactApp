@@ -19,10 +19,12 @@ function About() {
           3)Graph page which uses React query to call Covid cases data and React
           fusion charts which renders data as graphical representation.{" "}
           <br></br>
-          4)Due to time constraints ,The graph page currently only loads
-          Worldwide covid data as graph,but we do make api calls to the
-          countrywise and datewise covid data as well.<br></br>
-          5) Also the React leaflet map is not added to the same page due to
+          4)Thge site is Mobile responsive 5)Due to time constraints ,The graph
+          page currently only loads Worldwide covid data as graph and data for
+          all countries,but we do make api calls to the datewise covid data as
+          well.
+          <br></br>
+          6) Also the React leaflet map is not added to the same page due to
           time limit,but I have worked with Leaflet map library in past and have
           succesfully created a project from it , I can share the link to that
           if required. well aware of its methods <br></br>6)To conclude I'd like

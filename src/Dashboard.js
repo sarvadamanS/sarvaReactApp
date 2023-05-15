@@ -8,15 +8,7 @@ import Card from "./UI/Card";
 
 function Dashboard() {
   let [graphdata, setGraphData] = useState();
-  const recieveData = (data, mode) => {
-    // console.log(data);
-    // if (mode === "country") {
-    //   console.log(data);
-    //   for (const key in data) {
-    //     console.log(`${key}: ${data[key]}`);
-    //   }
-    //   return;
-    // }
+  const recieveData = (data) => {
     setGraphData(data);
   };
   return (
