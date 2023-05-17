@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import Card from "../UI/Card";
 import Button from "../UI/Button";
 import ErrorModal from "../UI/ErrorModal";
-import "./AddUser.css";
+import "../index.css";
 
 const AddUser = (props) => {
+  let classLabel = "inline-block mb-2 p-1 font-bold";
+  let classInput =
+    "inline-block rounded w-[auto] p-1 m-1 border-4 border-primary focus:outline-none focus:border-emerald-300";
+
   let [showModal, setShowModal] = useState();
 
   let curMode = props.mode.mode,
@@ -13,18 +17,15 @@ const AddUser = (props) => {
     savedLastName,
     savedStatus,
     savedKey;
+  //If the mode is edit set the fields to given element
   if (curMode === "edit") {
-    console.log(curMode);
-    console.log(props.mode);
-    console.log(props.mode.data.firstname);
     isEditMode = true;
     savedFirstName = props.mode.data[0].firstname;
     savedLastName = props.mode.data[0].lastname;
     savedStatus = props.mode.data[0].status;
     savedKey = props.mode.key;
   }
-  console.log(props.mode);
-  console.log(savedStatus);
+  //useState for storing form values
   let [enteredFirstName, setEnteredFirstName] = useState(
     isEditMode ? savedFirstName : ""
   );
@@ -50,6 +51,7 @@ const AddUser = (props) => {
       });
       return;
     }
+    //Update the element
     if (isEditMode) {
       props.onListHandler(enteredFirstName, enteredLastName, enteredStatus, [
         true,
@@ -70,7 +72,6 @@ const AddUser = (props) => {
     setEnteredLastName(e.target.value);
   };
   const statusChangeHandler = (e) => {
-    console.log(e.target.value);
     setStatus(e.target.value);
   };
   return (
@@ -82,18 +83,25 @@ const AddUser = (props) => {
           modalCloseHandler={modalCloseClickHandler}
         ></ErrorModal>
       )}
-      <Card className="add-user">
+      <Card>
         <form onSubmit={addUserHandler}>
-          <label htmlFor="firstName"> First Name</label>
+          <label className={classLabel} htmlFor="firstName">
+            {" "}
+            First Name:
+          </label>
           <input
+            className={classInput}
             id="firstName"
             type="text"
             onChange={FirstNameChangeHandler}
             value={enteredFirstName}
           ></input>
           <br></br>
-          <label htmlFor="LastName">Last Name</label>
+          <label className={classLabel} htmlFor="LastName">
+            Last Name:
+          </label>
           <input
+            className={classInput}
             id="LastName"
             type="text"
             onChange={LastNameChangeHandler}
@@ -101,22 +109,27 @@ const AddUser = (props) => {
           ></input>{" "}
           <br></br>
           <b>Status: </b>
-          <label htmlFor="active">Active</label>
+          <label className={classLabel} htmlFor="active">
+            Active
+          </label>
           <input
             type="radio"
             id="active"
             onChange={statusChangeHandler}
             value="active"
             name="status"
-            defaultChecked
+            checked={enteredStatus === "active"}
           ></input>
-          <label htmlFor="inactive">Inactive</label>
+          <label className={classLabel} htmlFor="inactive">
+            Inactive
+          </label>
           <input
             type="radio"
             id="inactive"
             onChange={statusChangeHandler}
             value={"inactive"}
             name="status"
+            checked={enteredStatus === "inactive"}
           ></input>
           <br></br>
           <Button type="submit">Add/Update contact</Button>

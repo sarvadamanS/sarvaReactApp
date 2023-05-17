@@ -85,11 +85,12 @@ function ContactApp() {
       {showForm ? (
         <AddUser onListHandler={listItemHandler} mode={formMode}></AddUser>
       ) : (
-        <Card className="show-form-btn">
+        <Card className="show-form-btn z-1">
           <Button onClick={showFormHandler}>Create a contact</Button>
         </Card>
       )}
       <UserList
+        className="z-1"
         listItem={listItems}
         editListHandler={changeModeToEdit}
         deleteListHandler={deleteitem}

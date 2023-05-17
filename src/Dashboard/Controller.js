@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import CallApi from "./CallApi";
 import Button from "../UI/Button";
-import "./Controller.css";
+import "../index.css";
 
 const Controller = (props) => {
+  let classLabel = "inline-block mb-2 p-1 font-bold";
+  let classInput =
+    "inline-block rounded w-[auto] p-1 m-1 border-4 border-primary focus:outline-none focus:border-emerald-300";
+
   // Fetcher function
-  let [loadData, setLoadData] = useState(false);
+  let [loadData, setLoadData] = useState(true);
   let [enteredCountry, setEnteredCountry] = useState("");
   let [enteredDate, setEnteredDate] = useState("");
   const updateCountry = (e) => {
@@ -26,17 +30,19 @@ const Controller = (props) => {
       setDataToLoad({
         apiMode: "country",
         apiUrl: "https://disease.sh/v3/covid-19/countries",
-        args: enteredCountry,
+        args: enteredCountry.trim(),
       });
       return;
     }
     if (selectedReq === "date") {
       let inputDate = new Date(enteredDate);
-
+      console.log(inputDate);
       setDataToLoad({
         apiMode: "date",
         apiUrl: "https://disease.sh/v3/covid-19/historical/all?lastdays=all",
-        args: `${inputDate.getDate()}/${inputDate.getMonth()}/${inputDate.getFullYear()}`,
+        args: `${inputDate.getMonth() + 1}/${inputDate.getDate()}/${String(
+          inputDate.getFullYear()
+        ).slice(2)}`,
       });
       return;
     }
@@ -46,8 +52,8 @@ const Controller = (props) => {
       args: [],
     });
   };
-  const DataHandler = (data) => {
-    props.onRecieveData(data);
+  const DataHandler = (data, mode) => {
+    props.onRecieveData(data, mode);
     setLoadData(false);
   };
   return (
@@ -57,29 +63,45 @@ const Controller = (props) => {
       ) : (
         ""
       )}
-      <h1>Find live Covid Data:</h1>
-      <Button onClick={formClickHandler} dataKeyid="world">
-        Show world data
-      </Button>
-      <form className="submit-form">
-        <label htmlFor="country">Country</label>
+
+      <form className="  m-1 p-1 text-center">
+        <Button
+          className="m-2 p-2"
+          onClick={formClickHandler}
+          dataKeyid="world"
+        >
+          Show world data
+        </Button>{" "}
+        <hr></hr>
+        <label className={classLabel} htmlFor="country">
+          Country
+        </label>
         <input
+          className={classInput}
           id="country"
           type="text"
           value={enteredCountry}
           onChange={updateCountry}
-        ></input>
-        <Button onClick={formClickHandler} dataKeyid="country">
+        ></input>{" "}
+        <Button
+          className="m-2 p-2"
+          onClick={formClickHandler}
+          dataKeyid="country"
+        >
           Show country data
         </Button>
-        <label htmlFor="date">Date</label>
+        <hr></hr>
+        <label className={classLabel} htmlFor="date">
+          Date:
+        </label>
         <input
+          className={classInput}
           id="date"
           type="date"
           value={enteredDate}
           onChange={updateDate}
         ></input>
-        <Button onClick={formClickHandler} dataKeyid="date">
+        <Button className="m-2 p-2" onClick={formClickHandler} dataKeyid="date">
           Show date data
         </Button>
       </form>

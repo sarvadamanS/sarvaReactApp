@@ -1,11 +1,18 @@
 import React from "react";
-import "./NavBar.css";
+import "../index.css";
 const NavBar = () => {
+  let classLinks = "text-white font-bold hover:text-primary";
   return (
-    <header>
-      <a href="/contacts">Contacts App</a>
-      <a href="/maps">Maps and Graphs</a>
-      <a href="/about">About</a>
+    <header className="flex h-10 justify-evenly w-[100%] bg-secondary p-2 ">
+      <a className={classLinks} href="/contacts">
+        Contacts App
+      </a>
+      <a className={classLinks} href="/maps">
+        Maps and Graphs
+      </a>
+      <a className={classLinks} href="/about">
+        About
+      </a>
     </header>
   );
 };

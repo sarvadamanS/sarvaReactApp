@@ -1,6 +1,6 @@
 // STEP 1 - Include Dependencies
 // Include react
-import React, { useState } from "react";
+import React from "react";
 
 // Include the react-fusioncharts component
 import ReactFC from "react-fusioncharts";
@@ -21,8 +21,10 @@ ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 class Graph extends React.Component {
   render() {
     // STEP 2 - Chart Data
-    let givenData = this.props.inputData;
-    if (!givenData) return;
+    let givenData = this.props.inputData[0];
+    console.log(givenData);
+    // console.log(this.props.inputData);
+    if (!givenData) return <h4>Something went wrong</h4>;
     let arg1 = Object.keys(givenData);
     let agr2 = Object.values(givenData);
     let createObj = [];
@@ -56,8 +58,8 @@ class Graph extends React.Component {
       type: "column2d", // The chart type
       width:
         window.innerWidth >= 700
-          ? window.innerWidth / 1
-          : window.innerWidth / 2.5, // Width of the chart
+          ? window.innerWidth / 2.75
+          : window.innerWidth / 1.2, // Width of the chart
       height: window.innerHeight / 2, // Height of the chart
       dataFormat: "json", // Data type
       dataSource: {

@@ -7,17 +7,21 @@ import "./index.css";
 import Card from "./UI/Card";
 
 function Dashboard() {
-  let [graphdata, setGraphData] = useState();
-  const recieveData = (data) => {
-    setGraphData(data);
+  let [graphdata, setGraphData] = useState([null, "world"]);
+  const recieveData = (data, mode) => {
+    setGraphData([data, mode]);
   };
   return (
     <>
       <NavBar />
-      <Card className="dashboard">
+      <Card className="grid max-w-[90%] w-fit">
+        <b className="text-center text-2xl">Find live Covid Data:</b>
         <Controller onRecieveData={recieveData}></Controller>
-        <Map></Map>
-        <Graph className="map" inputData={graphdata}></Graph>
+        <br></br>
+        <div className="vis-elements ">
+          <Graph inputData={graphdata}></Graph>
+          <Map inputData={graphdata}></Map>
+        </div>
       </Card>
     </>
   );
