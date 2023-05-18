@@ -34,7 +34,13 @@ const Map = (props) => {
   let markers = "",
     lat = 0,
     lng = 0;
-
+  if (!apiData)
+    return (
+      <>
+        {" "}
+        <h4 className="text-red-600"> Could not load the map </h4>
+      </>
+    );
   if (curMode === "country") {
     dataObj.country = apiData.country;
     dataObj.countryInfo = apiData.countryInfo;

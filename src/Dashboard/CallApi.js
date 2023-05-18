@@ -43,7 +43,6 @@ const CallApi = (props) => {
     [sendData].forEach((el) => {
       let curVal = el[dateKeys[0]];
       dateData.cases = curVal[String(apiArgs)];
-      if (!curVal[String(apiArgs)]) return <>Error</>;
       curVal = el[dateKeys[1]];
       dateData.deaths = curVal[String(apiArgs)];
       curVal = el[dateKeys[2]];
@@ -51,6 +50,7 @@ const CallApi = (props) => {
     });
     // console.log(dateData);
     sendData = dateData;
+    if (dateData.cases === undefined) sendData = null;
   }
   // console.log(sendData);
   props.onDataRecieve(sendData, apiMode);

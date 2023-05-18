@@ -24,7 +24,14 @@ class Graph extends React.Component {
     let givenData = this.props.inputData[0];
     console.log(givenData);
     // console.log(this.props.inputData);
-    if (!givenData) return <h4>Something went wrong</h4>;
+    if (!givenData)
+      return (
+        <>
+          {" "}
+          <h4 className="text-red-600"> Unable to render the graph</h4>{" "}
+          <br></br>
+        </>
+      );
     let arg1 = Object.keys(givenData);
     let agr2 = Object.values(givenData);
     let createObj = [];
@@ -34,24 +41,6 @@ class Graph extends React.Component {
       return createObj.push({ label: el, value: agr2[i] });
     });
     console.log(createObj);
-    // const chartData = [
-    //   {
-    //     label: "Venezuela",
-    //     value: "290",
-    //   },
-    //   {
-    //     label: "Saudi",
-    //     value: "260",
-    //   },
-    //   {
-    //     label: "Canada",
-    //     value: "180",
-    //   },
-    //   {
-    //     label: "Iran",
-    //     value: "140",
-    //   },
-    // ];
 
     // STEP 3 - Creating the JSON object to store the chart configurations
     const chartConfigs = {
