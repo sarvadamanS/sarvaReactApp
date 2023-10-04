@@ -5,6 +5,7 @@ import Map from "./Dashboard/Map";
 import NavBar from "./UI/NavBar";
 import "./index.css";
 import Card from "./UI/Card";
+import DogPic from "./Dashboard/DogPic";
 function Dashboard() {
   return (
     <>
@@ -14,6 +15,7 @@ function Dashboard() {
         <Controller></Controller>
         <br></br>
         <div className="vis-elements ">
+          <DogPic></DogPic>
           <Graph></Graph>
           <Map></Map>
         </div>

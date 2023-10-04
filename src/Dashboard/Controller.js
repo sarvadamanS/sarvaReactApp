@@ -51,7 +51,7 @@ const Controller = (props) => {
     let dataToLoad = {
       apiMode: "dog",
       apiUrl: "https://dog.ceo/api/breeds/image/random",
-      args: [],
+      args: [Math.random() * 1000],
     };
     dispatch(updateApiData(dataToLoad));
   };
@@ -69,7 +69,7 @@ const Controller = (props) => {
           onClick={formClickHandler}
           dataKeyid="world"
         >
-          Show world data
+          Random Dog picture
         </Button>{" "}
         <hr></hr>
         <label className={classLabel} htmlFor="country">

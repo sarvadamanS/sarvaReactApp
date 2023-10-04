@@ -4,6 +4,7 @@ import queryClient from "..";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateRecievedData } from "../slices/recievedDataSlice";
+import { updateDogData } from "../slices/dogDataSlice";
 const CallApi = () => {
   const curApiData = useSelector((state) => state.apiData.value);
   const dispatch = useDispatch();
@@ -51,8 +52,15 @@ const CallApi = () => {
     if (dateData.cases === undefined) sendData = null;
   }
   // console.log(sendData);
-  let dataReceivedBack = [data[0], apiMode];
-  dispatch(updateRecievedData(dataReceivedBack));
+  if (apiMode === "country") {
+    let saveApiData = [data[0], apiMode];
+    dispatch(updateRecievedData(saveApiData));
+  }
+  if (apiMode === "dog") {
+    console.log(data);
+    let saveApiData = [data, apiMode];
+    dispatch(updateDogData(saveApiData));
+  }
   return <></>;
 };
 export default CallApi;
