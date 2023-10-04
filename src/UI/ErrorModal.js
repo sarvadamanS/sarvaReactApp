@@ -1,6 +1,5 @@
 import React from "react";
 import Button from "./Button";
-import Card from "./Card";
 import ReactDOM from "react-dom";
 import "../index.css";
 const Backdrop = (props) => {
@@ -13,7 +12,7 @@ const Backdrop = (props) => {
 };
 const ModalOverlay = (props) => {
   return (
-    <Card className="fixed p-0 top-[30vh] left-[20%]   overflow-hidden ">
+    <div className="fixed p-0 top-[30%] left-[50%] bg-white  overflow-hidden ">
       <header className="p-1 bg-secondary">
         <h2 className="m-0 text-white text-center">{props.title}</h2>
       </header>
@@ -24,7 +23,7 @@ const ModalOverlay = (props) => {
       <footer className="p-2 flex justify-center">
         <Button onClick={props.modalCloseHandler}>Ok</Button>
       </footer>
-    </Card>
+    </div>
   );
 };
 const ErrorModal = (props) => {

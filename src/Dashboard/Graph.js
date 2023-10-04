@@ -1,6 +1,8 @@
 // STEP 1 - Include Dependencies
 // Include react
 import React from "react";
+import { useState, useEffect } from "react";
+import { useSelector, connect } from "react-redux";
 
 // Include the react-fusioncharts component
 import ReactFC from "react-fusioncharts";
@@ -17,31 +19,45 @@ import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 // Adding the chart and theme as dependency to the core fusioncharts
 ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
+const mapStateToProps = (state) => ({
+  recievedData: state.recievedData,
+});
 // STEP 4 - Creating the DOM element to pass the react-fusioncharts component
 class Graph extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     // STEP 2 - Chart Data
-    let givenData = this.props.inputData[0];
-    console.log(givenData);
-    // console.log(this.props.inputData);
-    if (!givenData)
+    if (!this.props.recievedData) return;
+    let dataReceivedBack = this.props.recievedData.value;
+
+    if (!dataReceivedBack)
       return (
         <>
           {" "}
-          <h4 className="text-red-600"> Unable to render the graph</h4>{" "}
-          <br></br>
+          <h4 className="text-red-600"> Could not load the map </h4>
         </>
       );
-    let arg1 = Object.keys(givenData);
-    let agr2 = Object.values(givenData);
+    let curMode = dataReceivedBack[1];
+    let apiData = dataReceivedBack[0];
+    if (!apiData)
+      return (
+        <>
+          {" "}
+          <h4 className="text-red-600"> Could not load the graph</h4>
+        </>
+      );
+    // console.log(this.props.inputData);
+    let arg1 = Object.keys(apiData);
+    let agr2 = Object.values(apiData);
     let createObj = [];
     // console.log(Object.values(givenData));
     arg1.forEach((el, i) => {
       if (el === "updated") return;
+      if (isNaN(agr2[i])) return;
       return createObj.push({ label: el, value: agr2[i] });
     });
-    console.log(createObj);
-
     // STEP 3 - Creating the JSON object to store the chart configurations
     const chartConfigs = {
       type: "column2d", // The chart type
@@ -74,4 +90,5 @@ class Graph extends React.Component {
   }
 }
 
-export default Graph;
+// export default Graph;
+export default connect(mapStateToProps)(Graph);

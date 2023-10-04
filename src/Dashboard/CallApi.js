@@ -1,42 +1,40 @@
 import React from "react";
 import { useQuery } from "react-query";
 import queryClient from "..";
-const CallApi = (props) => {
-  console.log(props.changeData);
-  let apiMode = props.changeData.apiMode,
-    apiUrl = props.changeData.apiUrl,
-    apiArgs = props.changeData.args;
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { updateRecievedData } from "../slices/recievedDataSlice";
+const CallApi = () => {
+  const curApiData = useSelector((state) => state.apiData.value);
+  const dispatch = useDispatch();
+  console.log(curApiData);
+  let apiMode, apiUrl, apiArgs;
+  let [apiPayload, setApiPayload] = useState("");
+  useEffect(() => {
+    setApiPayload(curApiData);
+  }, [curApiData]);
+  apiMode = apiPayload.apiMode;
+  apiUrl = apiPayload.apiUrl;
+  apiArgs = apiPayload.args;
 
   // console.log(apiMode);
   // console.log(apiUrl);
   // console.log(apiArgs);
   const getFacts = async () => {
     const res = await fetch(apiUrl);
-    console.log(res);
     return res.json();
   };
 
   // Using the hook
-  const { data, error, isLoading } = useQuery(
-    props.changeData.apiMode,
-    getFacts
-  );
+  const { data, error, isLoading } = useQuery(`${apiMode}${apiArgs}`, getFacts);
   // Error and Loading states
   if (error) return <p>Error</p>;
   if (isLoading) return <p>is Loading</p>;
-  // Show the response if everything is fine
-  // if (apiMode === "country") {
-  //   data.filter((el) => el.country === "Algeria");
-  // }
-  let sendData = queryClient.getQueryData(props.changeData.apiMode);
-  if (apiMode === "country") {
-    sendData = sendData.filter(
-      (el) => el.country.toUpperCase() === apiArgs.toUpperCase()
-    )[0];
-  }
+
+  // console.log(data);
+  let sendData = queryClient.getQueryData(apiMode);
+  console.log(data);
   if (apiMode === "date") {
-    console.log(apiArgs);
-    console.log(sendData);
     let dateKeys = Object.keys(sendData);
     // console.log(dateKeys);
     let dateData = { cases: "", deaths: "", recovered: "" };
@@ -53,7 +51,8 @@ const CallApi = (props) => {
     if (dateData.cases === undefined) sendData = null;
   }
   // console.log(sendData);
-  props.onDataRecieve(sendData, apiMode);
+  let dataReceivedBack = [data[0], apiMode];
+  dispatch(updateRecievedData(dataReceivedBack));
   return <></>;
 };
 export default CallApi;

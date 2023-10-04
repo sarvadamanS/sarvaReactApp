@@ -5,9 +5,9 @@ import ErrorModal from "../UI/ErrorModal";
 import "../index.css";
 
 const AddUser = (props) => {
-  let classLabel = "inline-block mb-2 p-1 font-bold";
+  let classLabel = "inline-block mb-2 p-1 ";
   let classInput =
-    "inline-block rounded w-[auto] p-1 m-1 border-4 border-primary focus:outline-none focus:border-emerald-300";
+    "inline-block rounded w-[90%] p-1 m-1 border-2 border-primary focus:outline-none focus:border-emerald-300  ";
 
   let [showModal, setShowModal] = useState();
 

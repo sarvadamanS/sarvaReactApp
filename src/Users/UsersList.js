@@ -18,7 +18,7 @@ const UserList = (props) => {
       ) : (
         <ul className="list-none p-1">
           {props.listItem.map((el) => (
-            <li className="border-4 border-secondary m-2 p-2  " key={el.key}>
+            <li className=" bg-white  m-2 p-2  " key={el.key}>
               <b>First name: </b>
               {el.firstname} <b>Last Name: </b>
               {el.lastname} <b>Status: </b>
